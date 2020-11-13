@@ -106,6 +106,8 @@ seata.sh -m db
 
 #### 8、更多详细说明
 
+欢迎stars 和 fork , 也可以 Emall 交流 small-rose@qq.com
+
 使用此demo过程有问题可以参考我的博客文章：[《SpringCloud 分布式事务 Seata 方案实例》](https://zhangxiaocai.cn/posts/ea07db80.html)
 
 如果涉及seata版本问题，文章也有整理说明。
