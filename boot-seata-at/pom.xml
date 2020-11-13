@@ -2,19 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.xiaocai.distran</groupId>
+        <artifactId>distributed-transaction</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
 
-    <groupId>com.xiaocai.distran</groupId>
-    <artifactId>distributed-transaction</artifactId>
+    <groupId>com.xiaocai.seata</groupId>
+    <artifactId>boot-seata-at</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>distributed-transaction</name>
-    <description>DistributedTransaction project for Spring Boot</description>
+    <name>boot-seata-at</name>
+    <description>boot-seata-at for Spring Boot</description>
 
-    <packaging>pom</packaging>
 
     <modules>
-        <module>boot-seata-at</module>
-
+        <module>server-eureka-9900</module>
+        <module>server-order-9901</module>
+        <module>server-store-9902</module>
+        <module>server-account-9903</module>
     </modules>
 
     <properties>
