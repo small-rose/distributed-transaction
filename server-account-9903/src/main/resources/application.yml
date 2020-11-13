@@ -1,0 +1,81 @@
+server:
+  port: 9903
+  servlet:
+    application-display-name: server-account
+
+#====================================datasource =============================================
+spring:
+  application:
+    name: server-account
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    platform: mysql
+    url: jdbc:mysql://127.0.0.1:3306/server_account?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+    username: root
+    password: 123456
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+#    filters: stat,wall,log4j
+    logSlowSql: true
+  #====================================cloud  =============================================
+  cloud:
+    alibaba:
+      seata:
+        enabled: true
+        tx-service-group: my_test_tx_group
+        enable-auto-data-source-proxy: true
+        service:
+          disable-global-transaction: false
+          vgroupMapping.my_test_tx_group: seata_server
+          grouplist:
+            default: 127.0.0.1:8091
+
+#    consul:
+#      host: localhost
+#      port: 8500
+#      discovery:
+#        service-name: ${spring.application.name}
+
+
+#==================================== logging =============================================
+logging:
+  level:
+    root: info
+    com:
+      xiaocai:
+        distran:
+          serverorder: info
+    io:
+      seata: info
+    org:
+      springframework:
+        cloud:
+          alibaba:
+            seata:
+              web: info
+
+mybatis:
+  # spring boot集成mybatis的方式打印sql
+  configuration:
+    mapUnderscoreToCamelCase: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#==================================== eureka =============================================
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: http://localhost:9900/eureka
+    fetch-registry: true
+  instance:
+    instance-id: server-account  # 可以自定义服务名称展示
+    prefer-ip-address: true # 访问路径可以显示IP
+
+
