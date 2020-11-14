@@ -2,25 +2,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.xiaocai.distran</groupId>
         <artifactId>distributed-transaction</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-
-    <groupId>com.xiaocai.seata</groupId>
-    <artifactId>boot-seata-at</artifactId>
+    <groupId>com.xiaocai.distran</groupId>
+    <artifactId>boot-hmily-tcc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>boot-seata-at</name>
-    <description>boot-seata-at for Spring Boot</description>
-
+    <name>boot-hmily-tcc</name>
+    <description>boot-hmily-tcc for Spring Boot</description>
 
     <modules>
-        <module>server-eureka-9900</module>
-        <module>server-order-9901</module>
-        <module>server-store-9902</module>
-        <module>server-account-9903</module>
+        <module>hmily-order</module>
+        <module>hmily-store</module>
+        <module>hmily-account</module>
     </modules>
 
     <properties>
@@ -73,7 +71,6 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-springboot.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-devtools</artifactId>
@@ -103,6 +100,11 @@
                         <artifactId>junit-vintage-engine</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <optional>true</optional>
             </dependency>
         </dependencies>
     </dependencyManagement>

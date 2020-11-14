@@ -16,3 +16,11 @@
 
 如果有异常可以参考文章 [《spring-cloud 常见异常》](https://zhangxiaocai.cn/posts/1618e871.html) （适合新手）。
 
+### 2、 boot-hmily-tcc
+
+基于spring boot + hmily + nacos + openfeign + mybatis 做的Hmily TCC 模型分布式事务Demo
+
+详细使用文档在 boot-hmily-tcc 文件夹下的[README文档](https://github.com/small-rose/distributed-transaction/tree/main/boot-hmily-tcc)
+
+
+

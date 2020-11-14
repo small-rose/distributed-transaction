@@ -14,7 +14,7 @@
 
     <modules>
         <module>boot-seata-at</module>
-
+        <module>boot-hmily-tcc</module>
     </modules>
 
     <properties>
