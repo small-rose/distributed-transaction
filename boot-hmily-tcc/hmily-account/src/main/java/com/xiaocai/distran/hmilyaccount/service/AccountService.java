@@ -2,5 +2,5 @@ package com.xiaocai.distran.hmilyaccount.service;
 
 public interface AccountService {
 
-    boolean decreaseAccount(int userId, double money);
+    boolean tryDecreaseAccount(int userId, double money);
 }

@@ -1,25 +1,21 @@
 server:
-  port: 9911
+  port: 9912
 
 spring:
   application:
-    name: hmily-order
+    name: hmily-stock
 
-#--------------- datasource  -----------
+  #--------------- datasource  -----------
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/hmily_order?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8&nullCatalogMeansCurrent=true
+    url: jdbc:mysql://127.0.0.1:3306/hmily_store?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8&nullCatalogMeansCurrent=true
     username: root
     password: 123456
-#------------- nacos discovery -----------
+  #------------- nacos discovery -----------
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-  devtools:
-    restart:
-      enabled: true
-
 
 #--------------------- logging --------------
 logging:
@@ -31,9 +27,6 @@ logging:
     org:
       dromara:
         hmily: info
-    io:
-      netty: info
-
 
 mybatis:
   # spring boot集成mybatis的方式打印sql
@@ -47,11 +40,9 @@ ribbon:
   NFLoadBalancerRuleClassName:  com.netflix.loadbalancer.RandomRule
   MaxAutoRetriesNextServer : 0
   MaxAutoRetries: 0
-  ReadTimeout: 5000
-  ConnectTimeout: 5000
+  ReadTimeout: 3000
 
 feign:
   hystrix:
     enabled : false
     # 在feign中开启hystrix功能，默认情况下feign不开启hystrix功能
-

@@ -11,6 +11,31 @@ import org.springframework.stereotype.Component;
 @Component
 public interface AccountMapper {
 
-    @Update("UPDATE ams_account SET amount = amount - #{money}  WHERE user_id = #{userId} and amount >= #{money}")
-    public boolean decreaseAccount(@Param("userId") int userId, @Param("money") double money);
+    /**
+     *  try 扣款
+     * @param userId
+     * @param amount
+     * @return
+     */
+    @Update("update ams_account SET balance = balance - #{amount}, freeze_amount = freeze_amount + #{amount} WHERE user_id = #{userId} and balance >= #{amount}")
+    public int tryDecreaseAccount(@Param("userId") int userId, @Param("amount") double amount);
+
+
+    /**
+     * 确认扣款
+     * @param userId
+     * @param amount
+     * @return
+     */
+    @Update("update ams_account SET freeze_amount = freeze_amount - #{amount} WHERE user_id = #{userId} and balance >= #{amount}")
+    public int confirmDecreaseAccount(@Param("userId") int userId, @Param("amount") double amount);
+
+    /**
+     * 取消扣款
+     * @param userId
+     * @param amount
+     * @return
+     */
+    @Update("update ams_account SET balance = balance + #{amount}, freeze_amount = freeze_amount - #{amount} WHERE user_id = #{userId} and balance >= #{amount}")
+    public int cancelDecreaseAccount(@Param("userId") int userId, @Param("amount") double amount);
 }

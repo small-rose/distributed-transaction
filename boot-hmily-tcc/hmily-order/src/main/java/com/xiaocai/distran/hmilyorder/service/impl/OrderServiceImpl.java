@@ -3,13 +3,9 @@ package com.xiaocai.distran.hmilyorder.service.impl;
 import com.xiaocai.distran.hmilyorder.bean.OrderBean;
 import com.xiaocai.distran.hmilyorder.constants.OrderStatusEnum;
 import com.xiaocai.distran.hmilyorder.mapper.OrderMapper;
-import com.xiaocai.distran.hmilyorder.openfeign.AccountClient;
-import com.xiaocai.distran.hmilyorder.openfeign.StoreClient;
 import com.xiaocai.distran.hmilyorder.service.OrderService;
+import com.xiaocai.distran.hmilyorder.service.PayService;
 import lombok.extern.slf4j.Slf4j;
-import org.dromara.hmily.annotation.HmilyTCC;
-import org.dromara.hmily.core.holder.HmilyTransactionHolder;
-import org.dromara.hmily.repository.spi.entity.HmilyTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,66 +26,21 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
-
     @Autowired
-    private StoreClient storeClient;
-
-    @Autowired
-    private AccountClient accountClient;
+    private PayService payService;
 
     @Override
-    @HmilyTCC(confirmMethod = "orderConfirm", cancelMethod = "orderCancel")
     public String creatOrder(int prodId, Integer count, Double amount) {
-        HmilyTransactionHolder instance = HmilyTransactionHolder.getInstance();
-        HmilyTransaction currentTransaction = instance.getCurrentTransaction();
-        Long transId = currentTransaction.getTransId();
-
-        //String tranxsId = String.valueOf(HmilyTransactionHolder.getInstance().getCurrentTransaction().getTransId());
-        log.info("try order tranxsId : {}", transId);
-
         OrderBean order = saveOrder(prodId, count, amount);
-        long start = System.currentTimeMillis();
-        // 扣减账户金额
-        Boolean boolacct = accountClient.decreaseAccount(order.getUserId(),order.getTotalAmount());
-        // 扣减库存
-        Boolean boolstore = storeClient.updateStore(order.getProdId(),order.getNumbers());
-
-        System.out.println("hmily-cloud分布式事务耗时：" + (System.currentTimeMillis() - start));
-
-        if(!boolacct || !boolstore){ // 有一个失败事务就需要回滚
-            throw new RuntimeException("出问题了，订单需要回滚");
-        }
-
-        //localLogMapper.addTryLog(tranxsId);
-
+        payService.payAccount(order);
         return "success";
     }
-    public String orderConfirm(int prodId, Integer count, Double amount) {
-        log.info("----- confirm  add order ----");
-        Long transId = HmilyTransactionHolder.getInstance().getCurrentTransaction().getTransId();
-        log.info("----- confirm  add order   transId : " + transId );
-
-        return "订单确认成功";
-    }
-    public String orderCancel(int prodId, Integer count, Double amount) {
-        log.info("----- cancel  add order ----");
-        Long transId = HmilyTransactionHolder.getInstance().getCurrentTransaction().getTransId();
-        log.info("----- cancel  add order   transId : " + transId );
-
-
-
-        return "订单取消";
-    }
-
-
-
-
 
 
 
     private OrderBean saveOrder(int prodId, Integer count, Double amount) {
         final OrderBean order = buildOrder(prodId, count, amount);
-        orderMapper.addOrder(order);
+        orderMapper.createOrder(order);
         return order;
     }
 

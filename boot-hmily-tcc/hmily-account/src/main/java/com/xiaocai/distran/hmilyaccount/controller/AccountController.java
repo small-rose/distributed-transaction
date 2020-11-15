@@ -2,10 +2,10 @@ package com.xiaocai.distran.hmilyaccount.controller;
 
 import com.xiaocai.distran.hmilyaccount.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,17 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Slf4j
+@RequestMapping(value = "/account")
 public class AccountController {
 
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(value = "/v1/account/decrease" ,method = RequestMethod.POST)
-    public boolean decreaseAccount(@Param("userId") int userId, @Param("prodPrice") double prodPrice){
+    @RequestMapping(value = "/v1/decrease" ,method = RequestMethod.GET)
+    public boolean decreaseAccount(@RequestParam("userId") Integer userId, @RequestParam("amount") Double amount){
         //log.info("---decreaseAccount  XID : "+ RootContext.getXID());
         log.info(" receive param userId = "+userId);
-        log.info(" receive param prodPrice = "+prodPrice);
-        boolean bool = accountService.decreaseAccount(userId,prodPrice);
+        log.info(" receive param amount = "+amount);
+        boolean bool = accountService.tryDecreaseAccount(userId, amount);
         return bool;
     }
 

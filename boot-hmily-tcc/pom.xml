@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.xiaocai.distran</groupId>
+    <groupId>com.xiaocai.distran.hmily</groupId>
     <artifactId>boot-hmily-tcc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>boot-hmily-tcc</name>
@@ -17,7 +17,7 @@
 
     <modules>
         <module>hmily-order</module>
-        <module>hmily-store</module>
+        <module>hmily-stock</module>
         <module>hmily-account</module>
     </modules>
 

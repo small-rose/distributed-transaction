@@ -1,10 +1,10 @@
 hmily:
   server:
     configMode: local
-    appName: hmily-order
+    appName: hmily-stock
   #  如果server.configMode eq local 的时候才会读取到这里的配置信息.
   config:
-    appName: hmily-order
+    appName: hmily-stock
     serializer: kryo
     contextTransmittalMode: threadLocal
     scheduledThreadMax: 17
@@ -15,7 +15,7 @@ hmily:
     recoverDelayTime: 60
     cleanDelayTime: 180
     limit: 109
-    retryMax: 2
+    retryMax: 10
     bufferSize: 8192
     consumerThreads: 16
     asyncRepository: true

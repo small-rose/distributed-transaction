@@ -1,6 +1,8 @@
 package com.xiaocai.distran.hmilyorder.config;
 
+import feign.Logger;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -13,4 +15,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan(basePackages = "com.xiaocai.distran.hmilyorder.mapper")
 public class GlobalConfig {
+    @Bean
+    Logger.Level feignLoggerLevel(){
+        return Logger.Level.FULL;
+    }
 }

@@ -2,12 +2,13 @@ package com.xiaocai.distran.hmilyorder.constants;
 
 public enum OrderStatusEnum {
 
-    NOT_PAY(0, "未支付"),
-    PAY_SECCESS(1, "支付成功"),
-    PAY_FAIL(1,"支付失败");
+    NOT_PAY(1, "未支付"),
+    PAYING(2, "支付中"),
+    PAY_SECCESS(3, "支付成功"),
+    PAY_FAIL(4,"支付失败");
 
-    private int code ;
-    private String desc ;
+    private final int code ;
+    private final String desc ;
     OrderStatusEnum(int code, String desc){
         this.code = code;
         this.desc = desc ;
@@ -17,16 +18,8 @@ public enum OrderStatusEnum {
         return code;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
-
     public String getDesc() {
         return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
 }

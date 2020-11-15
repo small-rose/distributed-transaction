@@ -8,10 +8,11 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.xiaocai.distran</groupId>
-    <artifactId>hmily-order</artifactId>
+    <artifactId>hmily-store</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hmily-order</name>
+    <name>hmily-store</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -33,6 +34,7 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             <version>${spring-cloud-alibaba.version}</version>
         </dependency>
+
         <!--hmily -->
         <dependency>
             <groupId>org.dromara</groupId>
@@ -48,6 +50,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
 
 
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-consul-discovery -->
@@ -77,12 +80,6 @@
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
-        <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
         </dependency>
@@ -100,10 +97,6 @@
             <version>${mysql.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
         <dependency>
@@ -135,6 +128,7 @@
             <version>${spring-boot.version}</version>
             <optional>true</optional>
         </dependency>
+
     </dependencies>
 
 
@@ -149,6 +143,7 @@
                     <addResources>true</addResources>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
